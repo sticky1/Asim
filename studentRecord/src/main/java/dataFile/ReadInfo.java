@@ -29,7 +29,6 @@ public class ReadInfo {
 		while(input.hasNext()){
 			
 			str = input.nextLine();
-			System.out.println(str);
 			content = str.split("/");
 			field.add(content[0]);
 			position.add(Integer.parseInt(content[1]));

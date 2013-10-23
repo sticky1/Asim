@@ -1,6 +1,6 @@
 package dataFile;
 
-public class TestReadInfo {
+public class TestMainReadInfo {
 
 	public static void main(String[] args) {
 
@@ -10,5 +10,4 @@ public class TestReadInfo {
 		read.readFile();
 		read.displayContent();
 	}
-
 }
