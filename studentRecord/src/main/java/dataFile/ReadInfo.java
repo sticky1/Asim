@@ -15,12 +15,12 @@ public class ReadInfo {
 	private String[] content;
 	private String str;
 	private Logger log = Logger.getLogger(ReadInfo.class.getName());
-	private RootOfTree root;
+	private RootOfTree root = new RootOfTree();
 	
 	public void readLayout(){
 		
 		try {
-			input = new Scanner(new File("LayoutFormat.txt"));
+			input = new Scanner(new File("LayoutFormat"));
 		} catch (FileNotFoundException e) {
 			
 			e.printStackTrace();
@@ -29,25 +29,25 @@ public class ReadInfo {
 		while(input.hasNext()){
 			
 			str = input.nextLine();
-			
-			content = str.split("|");
+			System.out.println(str);
+			content = str.split("/");
 			field.add(content[0]);
 			position.add(Integer.parseInt(content[1]));
 			type.add(content[2]);
 		}
 		
-		log.info("Records' Layout is read.");
+		log.info("Records' Layout is read.\n");
 	}
 	
 	public void readFile(){
 		
 		input = new Scanner(System.in);
 		
-		System.out.println("\nEnter the name of the file to read: ");
-		String fileName = input.next();
+		//System.out.println("\nEnter the name of the file to read: ");
+		//String fileName = input.next();
 		
 		try {
-			input = new Scanner(new File(fileName));
+			input = new Scanner(new File("file.txt"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -55,13 +55,10 @@ public class ReadInfo {
 		while(input.hasNext()){
 			
 			str = input.nextLine();
+			System.out.println(str);
+			content = str.split("/");
 			
-			content = str.split("|");
-			
-			for(int i = 0; i < content.length; i++){
-				
-				insert();
-			}
+			insert();
 		}
 	}
 	
@@ -71,32 +68,46 @@ public class ReadInfo {
 		
 		if(root.getNoOfLocations() == 0){
 			
-			addressNode = new AddressTree(content[0]);
+			addressNode = new AddressTree(content[2]);
 			root.addAddress(addressNode);
 		}
 		else{
 			
 			int i = 0;
-			addressNode = root.getAddressNode(i);
+			addressNode = root.getAddressNode(0);
 			
-			while(addressNode.getAddress() != content[0]){
+			while(!addressNode.getAddress().contentEquals(content[2]) && i < root.getNoOfLocations() - 1){
 				
 				i++;
 				addressNode = root.getAddressNode(i);
 			}
+			
+			if(!addressNode.getAddress().contentEquals(content[2])){
+				
+				addressNode = new AddressTree(content[2]);
+				root.addAddress(addressNode);
+				
+			}
 		}
 		
-		InfoNode infoNode = new InfoNode(content[1], content[2]);
+		InfoNode infoNode = new InfoNode(content[0], content[1]);
 		addressNode.addInfoNode(infoNode);
 	}
 	
 	public void displayContent(){
 		
-		System.out.printf("\nThere are %d different locations: ", root.getNoOfLocations());
-		displayAddresses();
+		if(root.getNoOfLocations() == 1){
+			
+			System.out.println("\nThere is 1 location:");
+			displayAddresses();
+		}
+		else{
+		
+			System.out.printf("\nThere are %d different locations: ", root.getNoOfLocations());
+			displayAddresses();
+		}
 		
 		//Display different people under different locations
-		
 		displayInfo();
 	}
 	
@@ -104,7 +115,7 @@ public class ReadInfo {
 		
 		for(int i = 0; i < root.getNoOfLocations(); i++){
 			
-			root.getAddressNode(i).getAddress();
+			System.out.printf("\n%s", root.getAddressNode(i).getAddress());
 		}
 	}
 	
@@ -115,13 +126,13 @@ public class ReadInfo {
 			if(root.getAddressNode(i).getNoOfInfos() == 1){
 			
 				System.out.printf("\n%d. Person living in %s is: ", i + 1, root.getAddressNode(i).getAddress());
-				System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(i).getName(), root.getAddressNode(i).getInfoNode(i).getRollNo());
+				System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(0).getName(), root.getAddressNode(i).getInfoNode(0).getRollNo());
 			}else if(root.getAddressNode(i).getNoOfInfos() > 1){
 				
 				System.out.printf("\n%d. People living in %s are: ", i + 1, root.getAddressNode(i).getAddress());
 				for(int j = 0; j < root.getAddressNode(i).getNoOfInfos(); j++){
 					
-					System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(i).getName(), root.getAddressNode(i).getInfoNode(i).getRollNo());
+					System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(j).getName(), root.getAddressNode(i).getInfoNode(j).getRollNo());
 				}
 			}
 		}

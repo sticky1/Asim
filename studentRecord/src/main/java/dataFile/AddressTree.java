@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class AddressTree {
 
 	private String address;
-	private ArrayList<InfoNode> infoNodePointer;
+	private ArrayList<InfoNode> infoNodePointer = new ArrayList<InfoNode>();
 	private int noOfInfos = 0;
 	
 	public AddressTree(){
