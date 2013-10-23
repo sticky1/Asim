@@ -7,26 +7,28 @@ import java.text.NumberFormat;
 public class NumberFormatter {
 
 	private DecimalFormat myDecimalFormatter = new DecimalFormat();
-	private NumberFormat myNumberFormatter = new NumberFormat();
+	private NumberFormat myNumberFormatter = NumberFormat.getPercentInstance();
 	
 	private double orgNumber;
 	private String formattedNumber;
 	
-	public void readNumber(){
+	public double readNumber(){
 		
 		Scanner input = new Scanner(System.in);
 		
 		orgNumber = input.nextDouble();
+		return orgNumber;
 	}
 	
-	public void getFormattedNumber(){
+	public double getFormattedNumber(){
 		
 		formattedNumber = myDecimalFormatter.format(orgNumber);
+		return orgNumber;
 	}
 	
 	public String retrievePercentage(){
 		
-		formattedNumber = myNumberFormatter.getPercentage();
+		formattedNumber = myNumberFormatter.format(orgNumber);
 		return formattedNumber;
 	}
 	

@@ -6,19 +6,18 @@ import org.junit.Test;
 
 public class NumberFormatTest {
 
-	private NumberFormat myFormatter = new NumberFormat();
-	
+	private NumberFormatter myFormatter = new NumberFormatter();
 	
 	@Test
 	public void testReadNumber() {
 		
-		myFormatter.readNumber();
+		assertEquals(123,123.123, myFormatter.readNumber());
 	}
 
 	@Test
-	public void testFormatNumber() {
+	public void testGetFormattedNumber() {
 		
-		myFormatter.formatNumber();
+		myFormatter.getFormattedNumber();
 	}
 
 	@Test
@@ -27,4 +26,10 @@ public class NumberFormatTest {
 		myFormatter.displayFormattedNumbers();
 	}
 
+	@Test
+	public void testRetrievePercentage(){
+		
+		myFormatter.readNumber();	
+		assertEquals("67%", myFormatter.retrievePercentage());
+	}
 }
