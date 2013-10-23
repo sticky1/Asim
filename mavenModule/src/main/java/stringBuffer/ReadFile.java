@@ -12,7 +12,7 @@ public class ReadFile {
 	public void read(){
 		
 		try {
-			input = new Scanner(new File("file.txt"));
+			input = new Scanner(new File("Asim.txt"));
 		} catch (FileNotFoundException e) {
 			
 			e.printStackTrace();
@@ -21,8 +21,7 @@ public class ReadFile {
 		while(input.hasNext()){
 			
 			str = new StringBuffer(input.nextLine());
-			
-			
+			System.out.println(str);
 		}
 	}
 }
