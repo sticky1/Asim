@@ -42,9 +42,6 @@ public class ReadInfo {
 		
 		input = new Scanner(System.in);
 		
-		//System.out.println("\nEnter the name of the file to read: ");
-		//String fileName = input.next();
-		
 		try {
 			input = new Scanner(new File("file.txt"));
 		} catch (FileNotFoundException e) {
