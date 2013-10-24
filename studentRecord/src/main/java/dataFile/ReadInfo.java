@@ -61,7 +61,7 @@ public class ReadInfo {
 	
 	public void displayContent(){
 		
-		Display displayObject = new Display();
+		Display displayObject = this.new Display();
 		
 		if(root.getNoOfLocations() == 1){
 			
