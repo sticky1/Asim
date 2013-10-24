@@ -41,6 +41,7 @@ public class ReadInfo {
 	public void readFile(){
 		
 		input = new Scanner(System.in);
+		TreeInsert tree = this.new TreeInsert();
 		
 		try {
 			input = new Scanner(new File("file.txt"));
@@ -54,81 +55,89 @@ public class ReadInfo {
 			System.out.println(str);
 			content = str.split("/");
 			
-			insert();
+			tree.insert();
 		}
-	}
-	
-	public void insert(){
-		
-		AddressTree addressNode;
-		
-		if(root.getNoOfLocations() == 0){
-			
-			addressNode = new AddressTree(content[2]);
-			root.addAddress(addressNode);
-		}
-		else{
-			
-			int i = 0;
-			addressNode = root.getAddressNode(0);
-			
-			while(!addressNode.getAddress().contentEquals(content[2]) && i < root.getNoOfLocations() - 1){
-				
-				i++;
-				addressNode = root.getAddressNode(i);
-			}
-			
-			if(!addressNode.getAddress().contentEquals(content[2])){
-				
-				addressNode = new AddressTree(content[2]);
-				root.addAddress(addressNode);
-				
-			}
-		}
-		
-		InfoNode infoNode = new InfoNode(content[0], content[1]);
-		addressNode.addInfoNode(infoNode);
 	}
 	
 	public void displayContent(){
 		
+		Display displayObject = new Display();
+		
 		if(root.getNoOfLocations() == 1){
 			
 			System.out.println("\nThere is 1 location:");
-			displayAddresses();
+			displayObject.displayAddresses();
 		}
 		else{
 		
 			System.out.printf("\nThere are %d different locations: ", root.getNoOfLocations());
-			displayAddresses();
+			displayObject.displayAddresses();
 		}
 		
 		//Display different people under different locations
-		displayInfo();
+		displayObject.displayInfo();
 	}
 	
-	public void displayAddresses(){
+	class TreeInsert{
 		
-		for(int i = 0; i < root.getNoOfLocations(); i++){
+		public void insert(){
 			
-			System.out.printf("\n%s", root.getAddressNode(i).getAddress());
+			AddressTree addressNode;
+			
+			if(root.getNoOfLocations() == 0){
+				
+				addressNode = new AddressTree(content[2]);
+				root.addAddress(addressNode);
+			}
+			else{
+				
+				int i = 0;
+				addressNode = root.getAddressNode(0);
+				
+				while(!addressNode.getAddress().contentEquals(content[2]) && i < root.getNoOfLocations() - 1){
+					
+					i++;
+					addressNode = root.getAddressNode(i);
+				}
+				
+				if(!addressNode.getAddress().contentEquals(content[2])){
+					
+					addressNode = new AddressTree(content[2]);
+					root.addAddress(addressNode);
+					
+				}
+			}
+			
+			InfoNode infoNode = new InfoNode(content[0], content[1]);
+			addressNode.addInfoNode(infoNode);
 		}
 	}
 	
-	public void displayInfo(){
+	class Display{
 		
-		for(int i = 0; i < root.getNoOfLocations(); i++){
+		public void displayAddresses(){
 			
-			if(root.getAddressNode(i).getNoOfInfos() == 1){
-			
-				System.out.printf("\n%d. Person living in %s is: ", i + 1, root.getAddressNode(i).getAddress());
-				System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(0).getName(), root.getAddressNode(i).getInfoNode(0).getRollNo());
-			}else if(root.getAddressNode(i).getNoOfInfos() > 1){
+			for(int i = 0; i < root.getNoOfLocations(); i++){
 				
-				System.out.printf("\n%d. People living in %s are: ", i + 1, root.getAddressNode(i).getAddress());
-				for(int j = 0; j < root.getAddressNode(i).getNoOfInfos(); j++){
+				System.out.printf("\n%s", root.getAddressNode(i).getAddress());
+			}
+		}
+		
+		public void displayInfo(){
+			
+			for(int i = 0; i < root.getNoOfLocations(); i++){
+				
+				if(root.getAddressNode(i).getNoOfInfos() == 1){
+				
+					System.out.printf("\n%d. Person living in %s is: ", i + 1, root.getAddressNode(i).getAddress());
+					System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(0).getName(), root.getAddressNode(i).getInfoNode(0).getRollNo());
+				}else if(root.getAddressNode(i).getNoOfInfos() > 1){
 					
-					System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(j).getName(), root.getAddressNode(i).getInfoNode(j).getRollNo());
+					System.out.printf("\n%d. People living in %s are: ", i + 1, root.getAddressNode(i).getAddress());
+					for(int j = 0; j < root.getAddressNode(i).getNoOfInfos(); j++){
+						
+						System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(j).getName(), root.getAddressNode(i).getInfoNode(j).getRollNo());
+					}
 				}
 			}
 		}
