@@ -1,4 +1,4 @@
-package date;
+package com.deerwalk.ml.date;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

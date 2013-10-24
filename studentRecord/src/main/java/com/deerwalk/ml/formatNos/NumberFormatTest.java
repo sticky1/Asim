@@ -1,4 +1,4 @@
-package formatNos;
+package com.deerwalk.ml.formatNos;
 
 import static org.junit.Assert.*;
 

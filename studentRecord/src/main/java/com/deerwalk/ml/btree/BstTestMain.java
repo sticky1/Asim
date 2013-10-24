@@ -1,4 +1,4 @@
-package btree;
+package com.deerwalk.ml.btree;
 
 import java.util.Scanner;
 

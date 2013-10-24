@@ -1,4 +1,4 @@
-package formatNos;
+package com.deerwalk.ml.formatNos;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package dataFile;
+package com.deerwalk.ml.dataFile;
 
 import java.util.ArrayList;
 

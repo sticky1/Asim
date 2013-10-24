@@ -1,4 +1,4 @@
-package stringBuffer;
+package com.deerwalk.ml.stringBuffer;
 
 public class TestReadFile {
 

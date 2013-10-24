@@ -1,4 +1,4 @@
-package date;
+package com.deerwalk.ml.date;
 
 import java.util.Date;
 import java.text.ParseException;
