@@ -1,29 +1,28 @@
 package dataFile;
 
+import java.util.ArrayList;
+
 public class InfoNode {
 
-	private String name;
-	private String rollNo;
+	private ArrayList<String> contents = new ArrayList<String>();
 	
 	public InfoNode(){
 		
-		this("", "");
+		this(null);
 	}
 	
-	public InfoNode(String nm, String roll){
+	public InfoNode(ArrayList<String> content){
 		
-		name = nm;
-		rollNo = roll;
+		contents = content;
 	}
 	
-	public String getName(){
+	public ArrayList<String> getContents(){
 		
-		return name;
+		return contents;
 	}
 	
-	public String getRollNo(){
+	public String getContents(int i){
 		
-		return rollNo;
+		return contents.get(i);
 	}
-	
 }

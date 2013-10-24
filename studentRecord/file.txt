@@ -1,2 +1,7 @@
-Ram Prasad Sharma/DW-32/Kupandole/234123/25
-Shyam Rijal/DW-34/Bhaktapur/123123/89
+Ram Prasad Sharma/DW-32/Kupandole/32123/11
+Shyam Rijal/DW-34/Bhaktapur/12312/12
+Hari Prasad Chaulagai/DW-33/Kupandole/123123/35
+Ashim Regmi/DW-35/Biratnagar/123123/524
+Bimal Gaire/DW-36/Palpa/123123/52
+Aananda Hari Mainali/DW-37/Biratnagar/123123/34
+Muneshwar Gautam/DW-38/Kupandole/524234/645

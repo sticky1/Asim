@@ -13,6 +13,7 @@ public class ReadInfo {
 	private ArrayList<Integer> position = new ArrayList<Integer>();
 	private ArrayList<String> type = new ArrayList<String>();
 	private String[] content;
+	private ArrayList<String> temp = new ArrayList<String>();
 	private String str;
 	private Logger log = Logger.getLogger(ReadInfo.class.getName());
 	private RootOfTree root = new RootOfTree();
@@ -52,7 +53,6 @@ public class ReadInfo {
 		while(input.hasNext()){
 			
 			str = input.nextLine();
-			System.out.println(str);
 			content = str.split("/");
 			
 			tree.insert();
@@ -103,13 +103,21 @@ public class ReadInfo {
 				if(!addressNode.getAddress().contentEquals(content[2])){
 					
 					addressNode = new AddressTree(content[2]);
-					root.addAddress(addressNode);
-					
+					root.addAddress(addressNode);		
 				}
 			}
 			
-			InfoNode infoNode = new InfoNode(content[0], content[1]);
-			addressNode.addInfoNode(infoNode);
+			temp = new ArrayList<String>();
+			for(int i = 0; i < content.length; i++){
+				
+				if(content[i] == "address"){
+					
+					continue;
+				}
+				temp.add(content[i]);
+			}
+		
+			addressNode.addInfoNode(temp);
 		}
 	}
 	
@@ -130,13 +138,27 @@ public class ReadInfo {
 				if(root.getAddressNode(i).getNoOfInfos() == 1){
 				
 					System.out.printf("\n%d. Person living in %s is: ", i + 1, root.getAddressNode(i).getAddress());
-					System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(0).getName(), root.getAddressNode(i).getInfoNode(0).getRollNo());
+					
+					System.out.printf("\n%s: %s", field.get(0), root.getAddressNode(i).getInfoNode(0).getContents(0));
+					for(int k = 1; k < field.size(); k++){
+					
+						if(field.get(k).contentEquals("address")){
+							
+							continue;
+						}
+						
+						System.out.printf(", %s: %s", field.get(k), root.getAddressNode(i).getInfoNode(0).getContents(k));
+					}
 				}else if(root.getAddressNode(i).getNoOfInfos() > 1){
 					
 					System.out.printf("\n%d. People living in %s are: ", i + 1, root.getAddressNode(i).getAddress());
 					for(int j = 0; j < root.getAddressNode(i).getNoOfInfos(); j++){
 						
-						System.out.printf("\n%s, roll number: %s", root.getAddressNode(i).getInfoNode(j).getName(), root.getAddressNode(i).getInfoNode(j).getRollNo());
+						System.out.printf("\n%s: %s", field.get(0), root.getAddressNode(i).getInfoNode(j).getContents(0));
+						for(int k = 1; k < field.size(); k++){
+						
+							System.out.printf(", %s: %s", field.get(k), root.getAddressNode(i).getInfoNode(j).getContents(k));
+						}
 					}
 				}
 			}

@@ -23,7 +23,9 @@ public class AddressTree {
 		return address;
 	}
 	
-	public void addInfoNode(InfoNode infoNode){
+	public void addInfoNode(ArrayList<String> temp){
+		
+		InfoNode infoNode = new InfoNode(temp);
 		
 		infoNodePointer.add(infoNode);
 		noOfInfos++;
